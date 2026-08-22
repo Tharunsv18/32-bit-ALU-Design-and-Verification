@@ -1,44 +1,156 @@
-# Design and Verification of 32-bit ALU
+# 32-bit ALU Design and Verification
 
-A Verilog HDL implementation and verification of a 32-bit Arithmetic Logic Unit (ALU), developed and analyzed using AMD/Xilinx Vivado.
+## Overview
 
-## Supported Operations
+This project implements a **32-bit Arithmetic Logic Unit (ALU)** using **Verilog HDL** and **AMD/Xilinx Vivado**.
 
-| ALU_Sel | Operation |
-|---|---|
-| `0000` | Addition |
-| `0001` | Subtraction |
-| `0010` | AND |
-| `0011` | OR |
-| `0100` | XOR |
-| `0101` | NOT A |
-| `0110` | Shift Left |
-| `0111` | Shift Right |
-| `1000` | Comparison (`A < B`) |
+The ALU performs arithmetic, logical, comparison, and shift operations on two 32-bit input values.
 
-## Project Structure
+The project includes RTL design, testbench simulation, synthesis, FPGA implementation, timing analysis, utilization analysis, power analysis, and Design Rule Check (DRC).
 
-- `src/alu_32bit.v` — 32-bit ALU RTL design
-- `testbench/alu_32bit_tb.v` — functional verification testbench
-- `constraints/alu_32bit.xdc` — FPGA constraints from the Vivado project
-- `Figures/` — RTL, synthesis, implementation, utilization, timing, power and DRC results
-- `waveform/` — simulation waveform evidence/configuration
-- `vivado/ALU_32BIT.xpr` — Vivado project file
+## Features
 
-## Verification
+The 32-bit ALU supports operations such as:
 
-The testbench exercises addition, subtraction, AND, OR, XOR, NOT, logical left/right shifts, and comparison. Functional simulation was performed in Vivado/XSim.
+- Addition
+- Subtraction
+- Bitwise AND
+- Bitwise OR
+- Bitwise XOR
+- Bitwise NOT
+- Left Shift
+- Right Shift
+- Less-Than Comparison
 
-## Implementation Analysis
+## Inputs and Output
 
-The project includes evidence from RTL analysis, synthesis, implementation, resource utilization, timing summary, power analysis, and Design Rule Check (DRC).
+| Signal | Width | Description |
+|---|---|---|
+| A | 32-bit | First input |
+| B | 32-bit | Second input |
+| ALU_Sel | 4-bit | Operation selector |
+| Result | 32-bit | ALU output |
 
-## Tools
+## Tools Used
 
 - Verilog HDL
 - AMD/Xilinx Vivado
-- Vivado/XSim waveform simulation
+- Vivado Simulator
+
+## Target FPGA
+
+```text
+xc7a35tcpg236-1
+```
+
+## Project Structure
+
+```text
+32-bit-ALU-Design-and-Verification/
+│
+├── src/
+│   └── alu_32bit.v
+│
+├── testbench/
+│   └── alu_32bit_tb.v
+│
+├── constraints/
+│   └── alu_32bit.xdc
+│
+├── Figures/
+│   └── Vivado result screenshots
+│
+├── waveforms/
+│   ├── ALU_32bit_Simulation_Waveform.png
+│   └── ALU_32bit_Simulation_Waveform.wcfg
+│
+├── .gitignore
+└── README.md
+```
+
+## Design Flow
+
+```text
+RTL Design
+    ↓
+Testbench
+    ↓
+Behavioral Simulation
+    ↓
+Synthesis
+    ↓
+Implementation
+    ↓
+Timing Analysis
+    ↓
+Utilization Analysis
+    ↓
+Power Analysis
+    ↓
+DRC
+```
+
+## Results
+
+The 32-bit ALU was successfully designed, simulated, synthesized, and implemented using Vivado.
+
+### Resource Utilization
+
+- Slice LUTs: **315**
+- Slices: **87**
+- LUTs as Logic: **315**
+- Bonded I/O: **100**
+
+### Timing
+
+- Total Negative Slack (TNS): **0.000 ns**
+- Total Hold Slack (THS): **0.000 ns**
+- Setup Failing Endpoints: **0**
+- Hold Failing Endpoints: **0**
+
+The Vivado timing report indicates that the specified timing constraints are met.
+
+### Design Rule Check
+
+The implemented design completed the Design Rule Check with:
+
+**No Violations Found**
+
+### Power Analysis
+
+Vivado power analysis was also performed on the implemented design. The generated estimate has a low confidence level and is included in the project results for reference.
+
+## Simulation
+
+A Verilog testbench is provided to verify the functionality of the ALU.
+
+The simulation tests different values of:
+
+- A
+- B
+- ALU_Sel
+- Result
+
+The simulation waveform files are available in the `waveforms` folder.
+
+## How to Run
+
+1. Open AMD/Xilinx Vivado.
+2. Create a new RTL project.
+3. Add `src/alu_32bit.v` as the design source.
+4. Add `testbench/alu_32bit_tb.v` as the simulation source.
+5. Add `constraints/alu_32bit.xdc` as the constraint file.
+6. Run Behavioral Simulation.
+7. Run Synthesis.
+8. Run Implementation.
+9. Check utilization, timing, power, and DRC reports.
+
+## Conclusion
+
+The project demonstrates the complete FPGA design flow for a **32-bit ALU using Verilog HDL**.
+
+The ALU was functionally verified through simulation and successfully processed through synthesis and implementation in Vivado.
 
 ## Author
 
-THARUNKUMAR S V
+**Tharunkumar SV**
